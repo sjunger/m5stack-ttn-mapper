@@ -16,7 +16,7 @@ x = None
 initialization = None
 string = None
 battery = None
-batteryload = None
+batterycharge = None
 
 
 label0 = M5TextBox(0, 90, "device status", lcd.FONT_DejaVu18, 0xFFFFFF, rotate=0)
@@ -32,9 +32,9 @@ label4 = M5TextBox(280, 216, "V2.1", lcd.FONT_Default, 0xFFFFFF, rotate=0)
 
 # Beschreibe diese Funktion...
 def AT(x):
-  global initialization, string, battery, batteryload
+  global initialization, string, battery, batterycharge
   if initialization == 0:
-    label3.setText('send message ...')
+    label3.setText('sending message ...')
     circle0.setBgColor(0x3366ff)
     circle0.setBorderColor(0x3366ff)
     rgb.setColorFrom(6 , 10 ,0x3333ff)
@@ -53,7 +53,7 @@ def AT(x):
 
 # Beschreibe diese Funktion...
 def send():
-  global x, initialization, string, battery, batteryload
+  global x, initialization, string, battery, batterycharge
   AT('SendHex=FFFF')
   wait_ms(2000)
   circle0.setBgColor(0xffff00)
@@ -70,7 +70,7 @@ def send():
 
 # Beschreibe diese Funktion...
 def LED_green_blink():
-  global x, initialization, string, battery, batteryload
+  global x, initialization, string, battery, batterycharge
   rgb.setBrightness(4)
   for count in range(1):
     rgb.setColorFrom(6 , 10 ,0x33ff33)
@@ -82,7 +82,7 @@ def LED_green_blink():
 
 # Beschreibe diese Funktion...
 def LED_red_blink():
-  global x, initialization, string, battery, batteryload
+  global x, initialization, string, battery, batterycharge
   rgb.setBrightness(4)
   for count2 in range(1):
     rgb.setColorFrom(6 , 10 ,0xff0000)
@@ -94,13 +94,13 @@ def LED_red_blink():
 
 
 def buttonB_wasPressed():
-  global initialization, x, string, battery, batteryload
+  global initialization, x, string, battery, batterycharge
   send()
   pass
 btnB.wasPressed(buttonB_wasPressed)
 
 def buttonC_wasPressed():
-  global initialization, x, string, battery, batteryload
+  global initialization, x, string, battery, batterycharge
   AT('DevAddr=?')
   label3.setText('ready-to-transmit ...')
   rgb.setColorFrom(6 , 10 ,0x000000)
@@ -138,8 +138,8 @@ label3.setText('ready-to-transmit ...')
 while True:
   label1.setText(str((str((power.getBatteryLevel())) + str('%'))))
   battery = power.getBatteryLevel()
-  batteryload = power.isCharging()
-  if batteryload == 1:
+  batterycharge = power.isCharging()
+  if batterycharge == 1:
     circle1.setBorderColor(0x33ff33)
     circle1.setBgColor(0x000000)
     LED_green_blink()
