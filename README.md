@@ -1,1 +1,1 @@
-# m5stack-ttn-mapper
+# M5Stack (Core) TTN-Mapper device
