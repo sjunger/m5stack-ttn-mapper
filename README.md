@@ -26,16 +26,16 @@ buttons:
 - button C: show device address
 
 status battery:
-- green outline: battery is loading (LED ist flashing green)
+- green outline: battery is loading (LED is flashing green)
 - green: 51% - 100 %
 - yellow: 26 % - 50 %
-- red: 0 % - 25 % (LED ist flashing red)
+- red: 0 % - 25 % (LED is flashing red)
 - red outline: not ready (on device initialization)
 
 device status:
 - green: ready-to-transmit
-- blue: sending message
-- yellow: wait
+- blue: sending message (LED is blue)
+- yellow: wait (LED is yellow)
 - red: not ready (on device initialization)
 
 More Information:
