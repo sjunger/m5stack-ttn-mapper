@@ -21,8 +21,9 @@ Insert the credentials for your device in UIFlow (for ABP).
 
 ![uiflow](.images/screenshot1.png)
 
-button B: send message
-button C: show device address
+buttons:
+- button B: send message
+- button C: show device address
 
 status battery:
 - green outline: battery is loading (LED ist flashing green)
