@@ -10,7 +10,7 @@ Hardware:
 
 ![device](.images/image1.png)
 
-![device display (german)](.images/image2.png)
+![device display](.images/image2.png)
 
 Usage:
 ------
