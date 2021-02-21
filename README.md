@@ -2,7 +2,8 @@
 
 This is a ready-to-use TTN-Mapper demo code for the M5Stack Core.
 
-##Hardware:
+Hardware:
+---------
 - Core: M5Stack (Basic/Grey/Fire)
 - Module: COM.LoRaWAN Module 868MHz (ASR6501)
 - Base: M5GO/FIRE Battery Bottom
