@@ -8,18 +8,19 @@ Hardware:
 - Module: COM.LoRaWAN Module 868MHz (ASR6501)
 - Base: M5GO/FIRE Battery Bottom
 
-##Usage:
+Usage:
+------
 
 ...
 
-##For M5Stack Fire:
-Change the pins in UIFlow and on the module from 17/16 to 5/13.
+__For M5Stack Fire:__ Change the pins in UIFlow and on the module from 17/16 to 5/13.
 
-![screenshot](.images/image1.png)
+![uiflow](.images/image1.png)
 
-![screenshot](.images/image2.png)
+![device](.images/image2.png)
 
-![screenshot](.images/screenshot1.png)
+![device display (german)](.images/screenshot1.png)
 
-##More Information:
+More Information:
+-----------------
 - TTN-Mapper: https://ttnmapper.org/
