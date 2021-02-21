@@ -17,7 +17,7 @@ Usage:
 
 __For M5Stack Fire:__ Change the pins in UIFlow and on the module from 17/16 to 5/13.
 
-...
+Insert for credentials for your device in UIFlow (for ABP)
 
 ![uiflow](.images/screenshot1.png)
 
