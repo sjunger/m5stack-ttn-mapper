@@ -21,6 +21,22 @@ Insert the credentials for your device in UIFlow (for ABP).
 
 ![uiflow](.images/screenshot1.png)
 
+button B: send message
+button C: show device address
+
+status battery:
+- green outline: battery is loading (LED ist flashing green)
+- green: 51% - 100 %
+- yellow: 26 % - 50 %
+- red: 0 % - 25 % (LED ist flashing red)
+- red outline: not ready (on device initialization)
+
+device status:
+- green: ready-to-transmit
+- blue: sending message
+- yellow: wait
+- red: not ready (on device initialization)
+
 More Information:
 -----------------
 - TTN-Mapper: https://ttnmapper.org/
