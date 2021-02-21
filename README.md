@@ -8,9 +8,9 @@ Hardware:
 - Module: COM.LoRaWAN Module 868MHz (ASR6501)
 - Base: M5GO/FIRE Battery Bottom
 
-![device](.images/image2.png)
+![device](.images/image1.png)
 
-![device display (german)](.images/screenshot1.png)
+![device display (german)](.images/image2.png)
 
 Usage:
 ------
@@ -19,7 +19,7 @@ __For M5Stack Fire:__ Change the pins in UIFlow and on the module from 17/16 to 
 
 ...
 
-![uiflow](.images/image1.png)
+![uiflow](.images/screenshot1.png)
 
 More Information:
 -----------------
