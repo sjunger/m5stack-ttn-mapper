@@ -47,5 +47,6 @@ LED:
 More Information:
 -----------------
 - TTN-Mapper: https://ttnmapper.org/
-- preview (german): https://www.bjoerns-techblog.de/2021/02/com-lorawan-modul-fuer-den-m5stack/
-- first steps: https://www.hackster.io/sodoku/m5stack-com-lorawan-using-uiflow-fdcd7f
+- The Things Network https://www.thethingsnetwork.org/
+- Module preview (german): https://www.bjoerns-techblog.de/2021/02/com-lorawan-modul-fuer-den-m5stack/
+- Module first steps: https://www.hackster.io/sodoku/m5stack-com-lorawan-using-uiflow-fdcd7f
