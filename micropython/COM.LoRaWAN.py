@@ -1,6 +1,6 @@
 # M5Stack (Core) TTN-Mapper device
 #
-# Version: 2.1 (2021-02-13)
+# Version: 2.2 (2021-05-08)
 # License: GNU General Public License v3.0
 # Author: Stefan Junger
 
@@ -13,7 +13,6 @@ setScreenColor(0x222222)
 
 
 x = None
-initialization = None
 string = None
 battery = None
 batterycharge = None
@@ -27,24 +26,12 @@ line1 = M5Line(M5Line.PLINE, 0, 200, 320, 200, 0xFFFFFF)
 circle0 = M5Circle(302, 22, 8, 0xff0303, 0xff0000)
 label3 = M5TextBox(10, 212, "status", lcd.FONT_DejaVu18, 0xFFFFFF, rotate=0)
 circle1 = M5Circle(18, 22, 8, 0x333333, 0xff0000)
-label4 = M5TextBox(280, 216, "V2.1", lcd.FONT_Default, 0xFFFFFF, rotate=0)
+label4 = M5TextBox(280, 218, "V2.2", lcd.FONT_Default, 0xFFFFFF, rotate=0)
 
 
 # Beschreibe diese Funktion...
 def AT(x):
-  global initialization, string, battery, batterycharge
-  if initialization == 0:
-    label3.setText('sending message ...')
-    circle0.setBgColor(0x3366ff)
-    circle0.setBorderColor(0x3366ff)
-    rgb.setColorFrom(6 , 10 ,0x3333ff)
-    rgb.setColorFrom(1 , 5 ,0x3333ff)
-  else:
-    label3.setText('initialization ...')
-    circle0.setBgColor(0xff0000)
-    circle0.setBorderColor(0xff0000)
-    rgb.setColorFrom(6 , 10 ,0xffff00)
-    rgb.setColorFrom(1 , 5 ,0xffff00)
+  global string, battery, batterycharge
   uart1.write(str((str('AT+') + str(x))))
   wait_ms(100)
   string = (uart1.read()).decode()
@@ -52,9 +39,38 @@ def AT(x):
   wait_ms(500)
 
 # Beschreibe diese Funktion...
-def send():
-  global x, initialization, string, battery, batterycharge
-  AT('SendHex=FFFF')
+def LED_green_blink():
+  global x, string, battery, batterycharge
+  rgb.setBrightness(4)
+  for count in range(1):
+    rgb.setColorFrom(6 , 10 ,0x33ff33)
+    rgb.setColorFrom(1 , 5 ,0x33ff33)
+    wait_ms(2000)
+    rgb.setColorFrom(6 , 10 ,0x000000)
+    rgb.setColorFrom(1 , 5 ,0x000000)
+    wait_ms(2000)
+
+# Beschreibe diese Funktion...
+def LED_red_blink():
+  global x, string, battery, batterycharge
+  rgb.setBrightness(4)
+  for count2 in range(1):
+    rgb.setColorFrom(6 , 10 ,0xff0000)
+    rgb.setColorFrom(1 , 5 ,0xff0000)
+    wait_ms(100)
+    rgb.setColorFrom(6 , 10 ,0x000000)
+    rgb.setColorFrom(1 , 5 ,0x000000)
+    wait_ms(2900)
+
+
+def buttonB_wasPressed():
+  global x, string, battery, batterycharge
+  label3.setText('sending message ...')
+  circle0.setBgColor(0x3366ff)
+  circle0.setBorderColor(0x3366ff)
+  rgb.setColorFrom(6 , 10 ,0x3333ff)
+  rgb.setColorFrom(1 , 5 ,0x3333ff)
+  AT('SendHex=CAFE')
   wait_ms(2000)
   circle0.setBgColor(0xffff00)
   circle0.setBorderColor(0xffff33)
@@ -67,40 +83,11 @@ def send():
   circle0.setBorderColor(0x33cc00)
   rgb.setColorFrom(6 , 10 ,0x000000)
   rgb.setColorFrom(1 , 5 ,0x000000)
-
-# Beschreibe diese Funktion...
-def LED_green_blink():
-  global x, initialization, string, battery, batterycharge
-  rgb.setBrightness(4)
-  for count in range(1):
-    rgb.setColorFrom(6 , 10 ,0x33ff33)
-    rgb.setColorFrom(1 , 5 ,0x33ff33)
-    wait_ms(2000)
-    rgb.setColorFrom(6 , 10 ,0x000000)
-    rgb.setColorFrom(1 , 5 ,0x000000)
-    wait_ms(2000)
-
-# Beschreibe diese Funktion...
-def LED_red_blink():
-  global x, initialization, string, battery, batterycharge
-  rgb.setBrightness(4)
-  for count2 in range(1):
-    rgb.setColorFrom(6 , 10 ,0xff0000)
-    rgb.setColorFrom(1 , 5 ,0xff0000)
-    wait_ms(100)
-    rgb.setColorFrom(6 , 10 ,0x000000)
-    rgb.setColorFrom(1 , 5 ,0x000000)
-    wait_ms(2900)
-
-
-def buttonB_wasPressed():
-  global initialization, x, string, battery, batterycharge
-  send()
   pass
 btnB.wasPressed(buttonB_wasPressed)
 
 def buttonC_wasPressed():
-  global initialization, x, string, battery, batterycharge
+  global x, string, battery, batterycharge
   AT('DevAddr=?')
   label3.setText('ready-to-transmit ...')
   rgb.setColorFrom(6 , 10 ,0x000000)
@@ -113,11 +100,12 @@ btnC.wasPressed(buttonC_wasPressed)
 
 uart1 = machine.UART(1, tx=17, rx=16)
 uart1.init(115200, bits=8, parity=None, stop=1)
-initialization = 1
 circle0.setBgColor(0xff0000)
 circle0.setBorderColor(0xff0000)
 circle1.setBorderColor(0xff0000)
 circle1.setBgColor(0x333333)
+rgb.setColorFrom(6 , 10 ,0xffff00)
+rgb.setColorFrom(1 , 5 ,0xffff00)
 label0.setText('')
 label3.setText('initialization ...')
 AT('LORAWAN=1')
@@ -125,11 +113,10 @@ AT('OTAA=0')
 AT('IsTxConfirmed=0')
 AT('ADR=0')
 AT('AppPort=10')
-AT('DevAddr=<DevAddr>')
-AT('NwkSKey=<NwkSKey>')
-AT('AppSKey=<AppSKey>')
+AT('DevAddr=26011146')
+AT('NwkSKey=A5001EFBB66D7C631E8630D8A42E66D5')
+AT('AppSKey=3AFCAC0D73E2F2DE1B7647ACACC47534')
 AT('Join=1')
-initialization = 0
 circle0.setBgColor(0x33cc00)
 circle0.setBorderColor(0x33cc00)
 rgb.setColorFrom(6 , 10 ,0x000000)
